@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: Jorun
+  data:
+      mongodb:
+          uri: mongodb://develop:development@localhost:27017/jorun
+          database: jorun
