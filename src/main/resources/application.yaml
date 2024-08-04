@@ -5,3 +5,8 @@ spring:
       mongodb:
           uri: mongodb://develop:development@localhost:27017/jorun
           database: jorun
+jwt:
+    public:
+        key: classpath:keys/app.pub
+    private:
+        key: classpath:keys/app.key
