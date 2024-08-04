@@ -12,7 +12,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  *
  * @author josias
  */
-//TODO: Modificar conforme minhas necessidades
 public interface UserRepository extends MongoRepository<User, String>{
     Optional<User> findByUsername(String Username);
 }

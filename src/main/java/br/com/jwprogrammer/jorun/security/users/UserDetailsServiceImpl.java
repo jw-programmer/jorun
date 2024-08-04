@@ -28,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return UserRepository.findByUsername(username)
                 .map(UserAuthenticated::new)
-                .orElseThrow(() -> new UsernameNotFoundException("usuaria não encontrado."));
+                .orElseThrow(() -> new UsernameNotFoundException("usuario não encontrado."));
     }
     
 }

@@ -7,6 +7,6 @@ spring:
           database: jorun
 jwt:
     public:
-        key: classpath:keys/app.pub
+        key: "classpath:./keys/app.pub"
     private:
-        key: classpath:keys/app.key
+        key: "classpath:./keys/app.key"

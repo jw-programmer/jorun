@@ -1,4 +1,4 @@
-package br.com.jwprogrammer.jorun.security.config;
+    package br.com.jwprogrammer.jorun.security.config;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -26,39 +26,39 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    
-    @Value("jwt.public.key")
+
+    @Value("${jwt.public.key}")
     private RSAPublicKey pub;
-    
-    @Value("jwt.private.key")
+
+    @Value("${jwt.private.key}")
     private RSAPrivateKey priv;
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(
-                        auth -> auth.requestMatchers("/authenticate").permitAll()
+                        auth -> auth.requestMatchers("/auth/authenticate").permitAll()
                                 .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .oauth2ResourceServer(
                         conf -> conf.jwt(Customizer.withDefaults()));
         return http.build();
     }
-    
+
     @Bean
     JwtDecoder jwtDecoder() {
         return NimbusJwtDecoder.withPublicKey(pub).build();
     }
-    
+
     @Bean
     JwtEncoder jwtEncoder() {
         var jwk = new RSAKey.Builder(pub).privateKey(priv).build();
         var jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
         return new NimbusJwtEncoder(jwks);
     }
-    
+
     @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }
